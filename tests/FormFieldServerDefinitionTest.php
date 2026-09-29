@@ -67,8 +67,23 @@ final class FormFieldServerDefinitionTest extends TestCase
     public function throwsForInvalidFilter(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Each server filter must be callable.');
+        $this->expectExceptionMessage('Each server filter must be a Closure or an invokable object.');
 
         new FormFieldServerDefinition(filters: ['invalid']);
+    }
+
+    /**
+     * Проверим, что строка-функция отклоняется при создании, хотя is_callable() для неё истинно: Validator
+     * исполняет фильтры payload только как Closure или invokable-объект и иначе упал бы уже при валидации.
+     *
+     * @see FormFieldServerDefinition::__construct()
+     */
+    #[Test]
+    public function throwsForCallableStringFilter(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Each server filter must be a Closure or an invokable object.');
+
+        new FormFieldServerDefinition(filters: ['trim']);
     }
 }

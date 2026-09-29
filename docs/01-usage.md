@@ -11,7 +11,9 @@
 - `FormDefinition` — описание формы (`id`, `title`, `fields`, `meta`);
 - `FormFieldDefinition` — описание поля (`key`, `label`, `fieldType`, `required`, `description`, `valueType`, `options`, `meta`, `requiredWhen`, `visibleWhen`, `suggest`, `server`);
 - `FormSuggestDefinition` — декларация источника подсказок (`endpoint`, `queryParam`, `valueKey`, `labelKey`, `payloadKey`, `minLength`, `debounceMs`).
-- `FormFieldServerDefinition` — серверная конфигурация поля (`default`, `property`, `rules`, `filters`).
+- `FormFieldServerDefinition` — серверная конфигурация поля (`default`, `property`, `rules`, `filters`). Фильтр —
+  `Closure` или invokable-объект (`FilterInterface` из `phpsoftbox/filter`); строки-функции (`'trim'`) и массивы
+  `[$object, 'method']` отклоняются в конструкторе, как и в фильтрах payload `Validator`.
 - enum-ы: `FormFieldTypesEnum`, `FormValueTypesEnum`, `FormIntervalTypesEnum`.
 
 Пример поля с suggest:
