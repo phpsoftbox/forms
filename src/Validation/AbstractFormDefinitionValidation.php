@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpSoftBox\Forms\Validation;
 
+use Closure;
 use PhpSoftBox\Forms\DTO\FormDefinition;
 use PhpSoftBox\Validator\AbstractFormValidation;
 use PhpSoftBox\Validator\Exception\ValidationException;
@@ -139,7 +140,7 @@ abstract class AbstractFormDefinitionValidation extends AbstractFormValidation
     }
 
     /**
-     * @param array<string, callable(mixed): mixed|list<callable(mixed): mixed>> $filters
+     * @param array<string, (Closure(mixed): mixed)|object|list<(Closure(mixed): mixed)|object>> $filters
      */
     protected function applyFilters(array $filters): void
     {
